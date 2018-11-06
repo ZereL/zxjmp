@@ -1,8 +1,8 @@
 /*
  * @Author: Hank 
  * @Date: 2018-10-31 11:47:01 
- * @Last Modified by:   Hank 
- * @Last Modified time: 2018-10-31 11:47:01 
+ * @Last Modified by: Hank
+ * @Last Modified time: 2018-11-06 15:03:55
  */
 import "@tarojs/async-await";
 import Taro, { Component } from "@tarojs/taro";
@@ -23,7 +23,7 @@ const store = dvaApp.getStore();
 class App extends Component {
   // 相当于app.json文件
   config = {
-    pages: ["pages/Home/index"],
+    pages: ["pages/Home/index", "pages/User/index", "pages/ApplicationForm/index"],
     window: {
       backgroundTextStyle: "light",
       navigationBarBackgroundColor: "#fff",

@@ -2,48 +2,30 @@
  * @Author: Hank 
  * @Date: 2018-11-06 10:53:03 
  * @Last Modified by: Hank
- * @Last Modified time: 2018-11-06 10:53:50
+ * @Last Modified time: 2018-11-06 12:20:07
  */
 import Taro from "@tarojs/taro";
 import { cdnHostName, hostName, APIVersion } from "../config";
 
-export default (options = { method: "GET", data: {} }) => {
-  if (!noConsole) {
-    console.log(
-      `${new Date().toLocaleString()}【 M=${options.url} 】P=${JSON.stringify(
-        options.data
-      )}`
-    );
-  }
+export const fetchAPI = (url, body) => {
+  // 拼接API地址
+  const API = APIVersion + url;
+  const token = Taro.getStorage({ key: "key" });
+
   return Taro.request({
-    url: baseUrl + options.url,
-    data: {
-      ...request_data,
-      ...options.data
+    url: API,
+    method: "POST", // or 'PUT'
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "token " + token
     },
-    header: {
-      "Content-Type": "application/json"
-    },
-    method: options.method.toUpperCase()
-  }).then(res => {
-    const { statusCode, data } = res;
-    if (statusCode >= 200 && statusCode < 300) {
-      if (!noConsole) {
-        console.log(
-          `${new Date().toLocaleString()}【 M=${options.url} 】【接口响应：】`,
-          res.data
-        );
-      }
-      if (data.status !== "ok") {
-        Taro.showToast({
-          title: `${res.data.error.message}~` || res.data.error.code,
-          icon: "none",
-          mask: true
-        });
-      }
-      return data;
-    } else {
-      throw new Error(`网络请求错误，状态码${statusCode}`);
-    }
-  });
+    data: JSON.stringify(body)
+  })
+    .then(response => response.json())
+    .then(responseJson => {
+      return responseJson;
+    })
+    .catch(error => {
+      throw error;
+    });
 };

@@ -2,7 +2,7 @@
  * @Author: Hank 
  * @Date: 2018-10-31 10:59:08 
  * @Last Modified by: Hank
- * @Last Modified time: 2018-11-06 15:02:41
+ * @Last Modified time: 2018-11-06 14:24:07
  */
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text } from "@tarojs/components";
@@ -14,10 +14,10 @@ import "./index.scss";
  * 首页组件
  */
 
-@connect(({ home }) => ({
-  ...home
+@connect(({ user }) => ({
+  ...user
 }))
-export default class Home extends Component {
+export default class User extends Component {
   config = {
     navigationBarTitleText: "臻享家"
   };
@@ -46,6 +46,12 @@ export default class Home extends Component {
 
   componentDidHide() {}
   /********************* 事件handler **********************/
+  goBackHandler = () => {
+    // 跳转到目的页面，在当前页面打开
+    Taro.redirectTo({
+      url: "/pages/Home/index"
+    });
+  };
   loginHandler = () => {
     const { dispatch } = this.props;
     console.log(dispatch);
@@ -63,13 +69,7 @@ export default class Home extends Component {
               // 如果发送请求成功
               Taro.showToast({
                 title: "发送请求成功",
-                icon: "success",
-                duration: 5000
-              }).then(() => {
-                // 跳转到目的页面，在当前页面打开
-                Taro.redirectTo({
-                  url: "/pages/User/index"
-                });
+                icon: "none"
               });
             })
             .catch(() => {
@@ -85,11 +85,6 @@ export default class Home extends Component {
       }
     });
   };
-  goToShow = () => {
-    Taro.redirectTo({
-      url: "/pages/ApplicationForm/index"
-    });
-  };
   /********************* 渲染页面的方法 *********************/
 
   /********************* 页面render方法 ********************/
@@ -97,15 +92,15 @@ export default class Home extends Component {
     console.log(this.props);
     return (
       <View className="login-page" id="login-page">
-        <View className="title">请登录</View>
+        <View className="title">欢迎回来 Hank</View>
         <View className="title-des">新用户注册即可报名达人秀</View>
         <View className="bgtopWrap">
           <View className="loginWrap">
-            <Button className="button" onClick={this.loginHandler}>
-              点击登录
+            <Button className="button" onClick={this.goBackHandler}>
+              返回
             </Button>
-            <Button className="button" onClick={this.goToShow}>
-              报名达人秀
+            <Button className="button">
+              点击跳转到臻享家APP
             </Button>
           </View>
         </View>
