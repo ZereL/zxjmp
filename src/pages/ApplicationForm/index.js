@@ -1,13 +1,12 @@
 /*
- * @Author: Hank 
- * @Date: 2018-10-31 10:59:08 
+ * @Author: Hank
+ * @Date: 2018-10-31 10:59:08
  * @Last Modified by: Hank
- * @Last Modified time: 2018-11-06 15:33:49
+ * @Last Modified time: 2019-01-29 16:53:45
  */
 import Taro, { Component } from "@tarojs/taro";
-import { View, Form, Switch } from "@tarojs/components";
+import { View, Form, Input, Button } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
-import { REQUEST_LOGIN } from "../../config";
 import "./index.scss";
 
 /**
@@ -38,7 +37,7 @@ export default class ApplicationForm extends Component {
 
   componentDidHide() {}
   /********************* 事件handler **********************/
-  formSubmit = e => {
+  formSubmit = () => {
     Taro.showToast({
       title: "发送成功",
       icon: "success",
@@ -97,9 +96,6 @@ export default class ApplicationForm extends Component {
                   <View className="numberWrap" onClick={this.sendSms}>
                     重新获取
                   </View>
-                )}
-                {this.state.sending == 1 && (
-                  <View className="numberWrap">{`${smsTime}秒后重发`}</View>
                 )}
                 {this.state.sending == 0 && (
                   <View className="numberWrap" onClick={this.sendSms}>

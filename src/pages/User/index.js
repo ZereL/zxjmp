@@ -2,10 +2,10 @@
  * @Author: Hank 
  * @Date: 2018-10-31 10:59:08 
  * @Last Modified by: Hank
- * @Last Modified time: 2018-11-06 14:24:07
+ * @Last Modified time: 2019-01-29 16:54:23
  */
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text } from "@tarojs/components";
+import { View, Button } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import { REQUEST_LOGIN } from "../../config";
 import "./index.scss";
